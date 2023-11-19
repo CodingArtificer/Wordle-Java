@@ -1,3 +1,4 @@
+package Wordle;
 
 public class Player 
 {
