@@ -6,8 +6,11 @@ import java.util.Random;
 import java.util.Scanner;
 // import Wordle.Functions;
 
-public class Main{
-    public class colors{
+public class Main
+{
+    // Colors for text in the terminal.
+    public class colors
+    {
         public static String RED_TEXT = "\u001B[31m";
         public static String YELLOW_TEXT = "\u001B[33m";
         public static String RESET = "\u001B[0m";
@@ -63,15 +66,18 @@ public class Main{
 
 
 
-    public static void main(String[] args) throws Exception{
-        try (Scanner input = new Scanner(System.in)) {
+    public static void main(String[] args) throws Exception
+    {
+        try (Scanner input = new Scanner(System.in)) 
+        {
             int i;
 
             String userGuess;
             String playAgain = "y";
             ArrayList<String> words = readFileIntoArray("Data/words.txt");
 
-            while(playAgain.equalsIgnoreCase("y")){
+            while(playAgain.equalsIgnoreCase("y"))
+            {
                 String wordToGuess = words.get(randomNum(words.size()));
 //                 System.out.println(wordToGuess);
 
@@ -82,16 +88,22 @@ public class Main{
                 System.out.println();
                 int tries = displayRules(mode);
                 // Gives the user a number of tries to guess the word correctly.
-                for(i = 0; i < tries; i++){
+                for(i = 0; i < tries; i++)
+                {
+                    // Have user input a word.
                     System.out.print("Enter word: ");
                     userGuess = input.nextLine();
-
-                    while(userGuess.length() != wordToGuess.length()){
+                    // If user fails to input a five-letter word, have them keep reinputting words until they do.
+                    while(userGuess.length() != wordToGuess.length())
+                    {
                         System.out.print("Guess a 5 letter word: ");
                         userGuess = input.nextLine();
                     }
-
-                    if(userGuess.equalsIgnoreCase(wordToGuess)){
+                    // If user guesses correct, ask them if they want to play again.
+                    // If they do, reset and have them play again.
+                    // If not, stop while() loop and end game.
+                    if(userGuess.equalsIgnoreCase(wordToGuess))
+                    {
                         System.out.println(colors.BG_GREEN + userGuess + colors.RESET);
                         System.out.println();
                         System.out.println("Congratulations you got it correct! Would you like to play again? (y/n)");
@@ -99,17 +111,22 @@ public class Main{
                         System.out.println();
                         break;
                     }
-                    else{
+                    // If user failed to guess right, show them what they got right and wrong and repeat for() loop.
+                    else
+                    {
                         int j = 0;
                         char[] letters = userGuess.toCharArray();
                         for(char c : letters){
-                            if(c == wordToGuess.charAt(j)){
+                            if(c == wordToGuess.charAt(j))
+                            {
                                 System.out.print(colors.BG_GREEN + c + colors.RESET);
                             }
-                            else if(wordToGuess.contains(Character.toString(c))){
+                            else if(wordToGuess.contains(Character.toString(c)))
+                            {
                                 System.out.print(colors.BG_YELLOW + c + colors.RESET);
                             }
-                            else{
+                            else
+                            {
                                 System.out.print(c+colors.RESET);
                             }
                             j++;
@@ -117,8 +134,11 @@ public class Main{
                         System.out.println("\n");
                     }
                 }
-                
-                if(i == tries){
+                // If user runs out of tries, ask if they want to play again.
+                // If they do, reset and have them play again.
+                // If not, stop while() loop and end game.
+                if(i == tries)
+                {
                     System.out.println("You ran out of tries. The word was: " + wordToGuess);
                     System.out.println("Would you like to play again? (y/n)");
                     playAgain = input.nextLine();
