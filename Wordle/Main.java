@@ -17,12 +17,14 @@ public class Main{
         public static String BG_YELLOW = "\u001b[43m";
     }
 
+    // Chooses a random number between the bounds of the number given.
     public static int randomNum(int sizeOfArray){
         Random rand = new Random();
         int randNum = rand.nextInt(1000) % sizeOfArray;
         return randNum;
     }
 
+    // Reads the entirety of a .txt file into an ArrayList and returns it.
     public static ArrayList<String> readFileIntoArray(String FileName){
         ArrayList<String> words = new ArrayList<>();
 
@@ -38,6 +40,7 @@ public class Main{
         return words;
     }
 
+    // Displays the rules of each particular difficulty.
     public static int displayRules(String mode){
         if(mode.equals("easy")){
             System.out.println("Worlde - Guess the word in 8 tries\n");
@@ -72,12 +75,13 @@ public class Main{
                 String wordToGuess = words.get(randomNum(words.size()));
 //                 System.out.println(wordToGuess);
 
-
+                // Asks the user what difficulty they want to play and prints the rules for it.
+                // If inputted difficulty doesn't match the one given, defaults to normal.
                 System.out.println("What mode would you like to play? (easy/normal/hard)");
                 String mode = input.nextLine();
                 System.out.println();
                 int tries = displayRules(mode);
-
+                // Gives the user a number of tries to guess the word correctly.
                 for(i = 0; i < tries; i++){
                     System.out.print("Enter word: ");
                     userGuess = input.nextLine();
